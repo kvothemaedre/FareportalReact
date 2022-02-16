@@ -10,9 +10,6 @@ function EmployeeDetails() {
     salary = salary + amount;
       return salary;
   }
-  const changeManager = function(newManager) {
-    managerName = newManager;
-  }
 
   const getAge = function() {
     return age;
