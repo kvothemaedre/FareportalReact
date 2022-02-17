@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Enter a value :</h3>
+        <input type="text" oninput="handleChange(event)" id="inp">
+        <hr/>
+        <div class="display-input">
+            <p>
+                Two way binding is done and it can be seen by the tracker below that displays the value of the variable binded to the input tag : 
+            </p>
+            <p id="displayVar">
+            </p>
+        </div>
+        <hr/>
+        <p>
+            A random number generator is triggered every 10 seconds and the value can be seen being changed in the input field as well as the place where it is being displayed!
+        </p>
+    </div>   
+    <script src="index.js"></script>
+</body>
+</html>
