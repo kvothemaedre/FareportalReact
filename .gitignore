@@ -1,1 +1,3 @@
-/Activity4/node_modules
+#ignore
+./Activity4/node_modules
+./Activity5/node_modules
