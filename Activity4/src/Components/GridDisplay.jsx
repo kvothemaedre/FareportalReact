@@ -15,22 +15,20 @@ class GridDisplay extends Component {
     return (
         <>      
             <div className="container">
-              <div className="row">
+              <div>
                   {this.state.list.map((item) => {
                       const tempString = item.firstName.toLowerCase() + " " + item.lastName.toLowerCase();
                       if (tempString.includes(this.props.query))
-                      return (<div className="col" key={item.id}>
-                          <Card item = {item} />
-                      </div>)
-                      if (item.id ==  parseInt(this.props.query))
-                      return (<div className="col" key={item.id}>
-                          <Card item = {item} />
-                      </div>)
-                      if (this.props.query === '') 
-                        return (<div className="col" key={item.id}>
-                          <Card item = {item} />
-                      </div>)
-                      
+                      return (
+                          <Card item = {item} key={item.id} />
+                      )
+                      if (item.id ===  parseInt(this.props.query))
+                      return (
+                           <Card item = {item} key={item.id} />
+                      )
+                      return (
+                           <Card item = {item} key={item.id} />
+                     )                    
                   }) }
               </div>              
             </div>
