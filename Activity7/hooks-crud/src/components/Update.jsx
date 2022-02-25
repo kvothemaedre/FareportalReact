@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-
-export const Update = () => {
+import React, { useEffect, useState } from 'react'
+import { Form, Button } from 'react-bootstrap';
+import axios from 'axios';
+export const Update = ({modify, setModify, itemID}) => {
     const [username, setUsername] = useState('');
     const [reason, setReason] = useState('');
     const [money, setMoney] = useState(0);
@@ -26,19 +27,34 @@ export const Update = () => {
         }
     }
 
+    useEffect(() => {
+        debugger;
+        if (itemID !== undefined) {
+            axios.get(`https://localhost:5001/api/Cause/${itemID}`).then(res => {
+            setUsername(res.data.frid);
+            setCid(itemID);
+            setReason(res.data.reason);
+            setMoney(res.data.money);
+        })
+        } 
+    //   return () => {
+        
+    //   }
+    },[itemID, modify])
+    
+
     const handleSubmit = (event) => {
         event.preventDefault();
-         Date.now().toString().substring(0,8);
 
         let payload = JSON.stringify({
-            cid: parseInt(causeid),
+            cid: cid,
             frid: username,
             reason: reason,
             money: parseInt(money)
         })
         
         
-        axios.put(`https://localhost:5001/api/Cause`,  payload, {headers:{"Content-Type" : "application/json"}} ).then(res => {
+        axios.put(`https://localhost:5001/api/Cause/${cid}`,  payload, {headers:{"Content-Type" : "application/json"}} ).then(res => {
             console.log(res);
             console.log(res.data);
 
@@ -47,15 +63,12 @@ export const Update = () => {
         setMoney(0);
         setReason('');
         setUsername('');
-        causeid = 0;
+        setModify(false);
     } 
-  return (
-    <div className='w-50 '>
+
+    const FormUpdate = () => {
+        return (
             <Form onSubmit={handleSubmit} >
-            <Form.Group className="mb-3">
-                <Form.Label>Cause id</Form.Label>
-                <Form.Control type="text" placeholder="Enter cid" name = "cid" value={cid} onChange={handleChange} />
-            </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="text" placeholder="Enter username" name = "username" value={username} onChange={handleChange} />
@@ -72,6 +85,12 @@ export const Update = () => {
                 Submit
             </Button>
             </Form>
+
+        )
+    }
+  return (
+    <div className='w-50 '>
+        {modify ? (<FormUpdate />)  : (<h3>Click on modify</h3>)}     
     </div>
   )
 }

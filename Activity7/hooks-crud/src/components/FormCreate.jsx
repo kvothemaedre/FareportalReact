@@ -29,10 +29,10 @@ const FormCreate  = (props) => {
         let causeid = Date.now().toString().substring(12);
 
         let payload = JSON.stringify({
-            "cid": parseInt(causeid),
-            "frid": username,
-            "reason": reason,
-            "money": parseInt(money)
+            cid: parseInt(causeid),
+            frid: username,
+            reason: reason,
+            money: parseInt(money)
         })
         
         

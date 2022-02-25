@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-
-const ListAll = () => {
+const ListAll = (props) => {
     
     const [fundraisers, setFundraisers] = useState([]);
     useEffect(() => {
         axios.get("https://localhost:5001/api/Cause").then(res => {
              setFundraisers(res.data);
         })
-    
     })
 
     const handleClick = (event) => { 
@@ -27,6 +25,11 @@ const ListAll = () => {
         })
     }
     
+    const handleModify = (event) => {
+        event.preventDefault();
+        props.setItemID(event.target.id);
+        props.setModify(true);
+    }
   return (
     <div>
           <table className="table">
@@ -46,7 +49,9 @@ const ListAll = () => {
                             <td>{item.frid.trimEnd()}</td>
                             <td>{item.reason}</td>
                             <td>{item.money}</td>
-                            <td><button className='btn btn-danger' id = {item.cid}  onClick={handleClick}>Delete</button></td>
+                            <td><button className='btn btn-danger' id = {item.cid}  onClick={handleClick}>Delete</button>
+                            | <button className='btn btn-warning' id = {item.cid} onClick={handleModify}>Modify</button>
+                            </td>
                         </tr>
                     )
                 })
@@ -56,5 +61,7 @@ const ListAll = () => {
       </div>
   )
 }
+
+
 
 export default ListAll
