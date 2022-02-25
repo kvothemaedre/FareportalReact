@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import Display from './Display'
 export class FormCause extends Component {
     constructor(props) {
         super(props)
@@ -8,6 +9,7 @@ export class FormCause extends Component {
             username : '',
             reason : '',
             money : 0,
+            update : false
         }
     }
     
@@ -28,8 +30,10 @@ export class FormCause extends Component {
     }
 
     handleSubmit = (event) => {
+
         event.preventDefault();
-        let causeid = Date.now().toString().substring(12);
+
+        let causeid = Date.now().toString().substring(9);
 
         const payload = {
             cid: parseInt(causeid),
@@ -47,7 +51,8 @@ export class FormCause extends Component {
             console.log(res);
             console.log(res.data);
         })
-        
+
+        this.setState({update: !this.state.update})
     }
   render() {
     return (
@@ -69,6 +74,8 @@ export class FormCause extends Component {
                 Submit
             </Button>
             </Form>
+            <hr />
+            <Display update={this.state.update}/>
         </div>
         
     )

@@ -9,7 +9,31 @@ export class Display extends Component {
     componentDidMount() {
         axios.get("https://localhost:5001/api/Cause").then(res => {
             const cause = res.data;
-             this.setState({ cause });
+            this.setState({ cause });
+        })
+    }
+    
+    componentDidUpdate() {
+        axios.get("https://localhost:5001/api/Cause").then(res => {
+            const cause = res.data;
+            this.setState({ cause });
+        })
+    }
+    
+    handleClick = (event) => { 
+        event.preventDefault();
+        axios.delete(`https://localhost:5001/api/Cause/${event.target.id}`)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            this.getData();
+        })
+    }
+
+    getData = () => {
+        axios.get("https://localhost:5001/api/Cause").then(res => {
+            const cause = res.data;
+            this.setState({cause});
         })
     }
   render() {
@@ -32,7 +56,7 @@ export class Display extends Component {
                             <td>{item.frid.trimEnd()}</td>
                             <td>{item.reason}</td>
                             <td>{item.money}</td>
-                            <td><button className='btn btn-danger'>Delete</button></td>
+                            <td><button className='btn btn-danger' id = {item.cid} onClick = {this.handleClick}>Delete</button></td>
                         </tr>
                     )
                 })

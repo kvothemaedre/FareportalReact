@@ -20,7 +20,7 @@ function App() {
       </Accordion.Item>
       <Accordion.Item eventKey="1">
         <Accordion.Header>Update a fundraiser :</Accordion.Header>
-        <Accordion.Body>
+        <Accordion.Body className="bg-warning text-dark">
         <Update  modify = {modify} setModify = {setModify} itemID = {itemID}/>
         </Accordion.Body>
       </Accordion.Item>
