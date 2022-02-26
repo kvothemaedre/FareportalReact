@@ -15,8 +15,8 @@ const Card = (props) => {
         <div className="card-body">
           <h5 className="card-title">Name : {`${item.firstName} ${item.lastName}` }</h5>
           <p className="card-title">ID : {item.id}</p>
-          <p className='card-subtitle  mb-2 text-muted'>{item.email}</p>
-          <p className='card-subtitle mb-2 text-muted'>gender : {item.gender}</p>
+          <p className='card-subtitle  mb-2 text-muted'>{item.reason}</p>
+          <p className='card-subtitle mb-2 text-muted'> {item.money}</p>
         </div>
       </div>
   )
