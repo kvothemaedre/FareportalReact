@@ -45,7 +45,7 @@ const FormCreate  = () => {
         setMoney(0);
         setReason('');
         setUsername('');
-        window.location = '/';
+        window.location = '/all';
 
     }
 
