@@ -66,7 +66,7 @@ export const Update = ({modify, setModify, itemID}) => {
         setModify(false);
     } 
 
-    const FormUpdate = () => {
+    const formUpdate = () => {
         return (
             <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3">
@@ -90,7 +90,7 @@ export const Update = ({modify, setModify, itemID}) => {
     }
   return (
     <div className='w-50 '>
-        {modify ? (<FormUpdate />)  : (<h3>Click on the modify button on any row you want to update in  "See all fundraisers" and come back!</h3>)}     
+        {modify ? formUpdate()  : (<h3>Click on the modify button on any row you want to update in  "See all fundraisers" and come back!</h3>)}     
     </div>
   )
 }

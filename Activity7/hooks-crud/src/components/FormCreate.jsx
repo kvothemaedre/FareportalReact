@@ -4,24 +4,17 @@ import { Form, Button } from 'react-bootstrap'
 
 const FormCreate  = (props) => {
 
-    const [username, setUsername] = useState('');
-    const [reason, setReason] = useState('');
-    const [money, setMoney] = useState(0);
+    const [field, setField] = useState({
+        username: '',
+        reason: '',
+        money: 0
+    });
 
     const handleChange = (event) => {
-        if (event.target.name === 'username') {
-            setUsername(
-                event.target.value
-            );
-        } else if (event.target.name === 'reason') {
-            setReason(
-                event.target.value
-            );
-        } else if (event.target.name === 'money') {
-            setMoney(
-                event.target.value
-            )
-        }
+        setField({
+            ...field,
+            [event.target.name]:event.target.value
+        })
     }
 
     const handleSubmit = (event) => {
@@ -30,9 +23,9 @@ const FormCreate  = (props) => {
 
         let payload = JSON.stringify({
             cid: parseInt(causeid),
-            frid: username,
-            reason: reason,
-            money: parseInt(money)
+            frid: field.username,
+            reason: field.reason,
+            money: parseInt(field.money)
         })
         
         
@@ -42,9 +35,13 @@ const FormCreate  = (props) => {
 
         })
         console.log(payload);
-        setMoney(0);
-        setReason('');
-        setUsername('');
+        setField({
+            username:'',
+            reason:'',
+            money: 0
+        })
+        window.location = '/all';
+
     }
 
     return (
@@ -52,15 +49,15 @@ const FormCreate  = (props) => {
             <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter username" name = "username" value={username} onChange={handleChange} />
+                <Form.Control type="text" placeholder="Enter username" name = "username" value={field.username} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Reason for the fundraiser</Form.Label>
-                <Form.Control type="text" value={reason} name = "reason" onChange={handleChange} />
+                <Form.Control type="text" value={field.reason} name = "reason" onChange={handleChange} />
             </Form.Group>         
             <Form.Group className="mb-3">
                 <Form.Label>Target</Form.Label>
-                <Form.Control type="number"  name="money"  value={money} onChange={handleChange} placeholder="Target" />
+                <Form.Control type="number"  name="money"  value={field.money} onChange={handleChange} placeholder="Target" />
             </Form.Group>
             <Button variant="primary" type="submit">
                 Submit
